@@ -16,19 +16,18 @@ function lcm(a, b) {
 // Your email path (replace non-alphanumerics with "_")
 const emailPath = 'mohimreza1234_gmail_com';
 
-// Define route (no /app prefix, ends with emailPath)
-app.get(`/${emailPath}`, (req, res) => {
-  const x = Number(req.query.x);
-  const y = Number(req.query.y);
+// Route with /app prefix
+app.get(`/app/${emailPath}`, (req, res) => {
+  const x = parseInt(req.query.x, 10);
+  const y = parseInt(req.query.y, 10);
 
-  if (!Number.isInteger(x) || x <= 0 || !Number.isInteger(y) || y <= 0) {
+  if (isNaN(x) || x <= 0 || isNaN(y) || y <= 0) {
     return res.type('text/plain').send('NaN');
   }
 
   res.type('text/plain').send(lcm(x, y).toString());
 });
 
-// Start server
 app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}/${emailPath}`);
+  console.log(`Server running at http://localhost:${port}/app/${emailPath}`);
 });
