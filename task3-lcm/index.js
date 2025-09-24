@@ -13,7 +13,7 @@ function lcm(a, b) {
 }
 
 // Your email formatted: replace all non-alphanumeric chars with "_"
-const emailPath = 'md_smith2_mail_srv_com';
+const emailPath = 'mohimreza1234_gmail_com';
 
 app.get(`/app/${emailPath}`, (req, res) => {
   const x = Number(req.query.x);
