@@ -14,13 +14,13 @@ function lcm(a, b) {
 // Your email path (replace non-alphanumerics with "_")
 const emailPath = 'mohimreza1234_gmail_com';
 
-// Define route
-app.get(`/app/${emailPath}`, (req, res) => {
+// Define route (no /app prefix)
+app.get(`/${emailPath}`, (req, res) => {
   const x = Number(req.query.x);
   const y = Number(req.query.y);
 
   if (!Number.isInteger(x) || x <= 0 || !Number.isInteger(y) || y <= 0) {
-    return res.send('NaN');
+    return res.type('text/plain').send('NaN');
   }
 
   res.type('text/plain'); // ensure plain text
@@ -29,5 +29,5 @@ app.get(`/app/${emailPath}`, (req, res) => {
 
 // Start server
 app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}/app/${emailPath}`);
+  console.log(`Server running at http://localhost:${port}/${emailPath}`);
 });
