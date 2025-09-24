@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
 
-// GCD + LCM helpers
+// GCD + LCM using BigInt
 function gcd(a, b) {
   a = BigInt(a);
   b = BigInt(b);
@@ -17,12 +17,12 @@ function lcm(a, b) {
 // Email path
 const emailPath = 'mohimreza1234_gmail_com';
 
-// Route with /app/ prefix
+// Route
 app.get(`/app/${emailPath}`, (req, res) => {
   const x = req.query.x;
   const y = req.query.y;
 
-  // Validate natural numbers (positive integers)
+  // Validate strictly as natural numbers (1,2,3,...)
   if (!/^[1-9]\d*$/.test(x) || !/^[1-9]\d*$/.test(y)) {
     return res.type('text/plain').send('NaN');
   }
@@ -30,7 +30,6 @@ app.get(`/app/${emailPath}`, (req, res) => {
   res.type('text/plain').send(lcm(x, y).toString());
 });
 
-// Start server
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}/app/${emailPath}`);
 });
