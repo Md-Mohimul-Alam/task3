@@ -11,19 +11,19 @@ function lcm(a, b) {
   return (a * b) / gcd(a, b);
 }
 
-// Your email path (replace non-alphanumerics with "_")
+// Your email path
 const emailPath = 'mohimreza1234_gmail_com';
 
 // Define route (no /app prefix)
 app.get(`/${emailPath}`, (req, res) => {
-  const x = Number(req.query.x);
-  const y = Number(req.query.y);
+  const x = parseInt(req.query.x, 10);
+  const y = parseInt(req.query.y, 10);
 
   if (!Number.isInteger(x) || x <= 0 || !Number.isInteger(y) || y <= 0) {
     return res.type('text/plain').send('NaN');
   }
 
-  res.type('text/plain'); // ensure plain text
+  res.type('text/plain'); // plain text response
   res.send(String(lcm(x, y)));
 });
 
