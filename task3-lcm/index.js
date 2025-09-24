@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
 
-// GCD + LCM helpers using BigInt to avoid overflow
+// GCD + LCM helpers using BigInt
 function gcd(a, b) {
   a = BigInt(a);
   b = BigInt(b);
@@ -17,8 +17,8 @@ function lcm(a, b) {
 // Your email path (replace non-alphanumeric characters with "_")
 const emailPath = 'mohimreza1234_gmail_com';
 
-// Define route (with /app/ prefix, ends with emailPath)
-app.get(`/app/${emailPath}`, (req, res) => {
+// Define route (no /app prefix)
+app.get(`/${emailPath}`, (req, res) => {
   const x = Number(req.query.x);
   const y = Number(req.query.y);
 
@@ -32,5 +32,5 @@ app.get(`/app/${emailPath}`, (req, res) => {
 
 // Start server
 app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}/app/${emailPath}`);
+  console.log(`Server running at http://localhost:${port}/${emailPath}`);
 });
