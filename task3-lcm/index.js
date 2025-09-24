@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
 
-// GCD + LCM helpers using BigInt
+// GCD + LCM helpers
 function gcd(a, b) {
   a = BigInt(a);
   b = BigInt(b);
@@ -14,16 +14,16 @@ function lcm(a, b) {
   return (BigInt(a) * BigInt(b)) / gcd(a, b);
 }
 
-// Your email path (replace non-alphanumeric characters with "_")
+// Email path
 const emailPath = 'mohimreza1234_gmail_com';
 
-// Define route (no /app prefix)
-app.get(`/${emailPath}`, (req, res) => {
-  const x = Number(req.query.x);
-  const y = Number(req.query.y);
+// Route with /app/ prefix
+app.get(`/app/${emailPath}`, (req, res) => {
+  const x = req.query.x;
+  const y = req.query.y;
 
-  // Check if x and y are natural numbers
-  if (!Number.isInteger(x) || x <= 0 || !Number.isInteger(y) || y <= 0) {
+  // Validate natural numbers (positive integers)
+  if (!/^[1-9]\d*$/.test(x) || !/^[1-9]\d*$/.test(y)) {
     return res.type('text/plain').send('NaN');
   }
 
@@ -32,5 +32,5 @@ app.get(`/${emailPath}`, (req, res) => {
 
 // Start server
 app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}/${emailPath}`);
+  console.log(`Server running at http://localhost:${port}/app/${emailPath}`);
 });
