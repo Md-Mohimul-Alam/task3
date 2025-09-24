@@ -2,11 +2,9 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Helper function to compute LCM
+// LCM helper functions
 function gcd(a, b) {
-  while (b !== 0) {
-    [a, b] = [b, a % b];
-  }
+  while (b !== 0) [a, b] = [b, a % b];
   return a;
 }
 
@@ -14,8 +12,8 @@ function lcm(a, b) {
   return (a * b) / gcd(a, b);
 }
 
-// Replace non-alphanumeric characters in email with underscores
-const emailPath = 'md_smith2_mail_srv_com'; // <-- replace with your email formatted
+// Your email formatted: replace all non-alphanumeric chars with "_"
+const emailPath = 'md_smith2_mail_srv_com';
 
 app.get(`/app/${emailPath}`, (req, res) => {
   const x = Number(req.query.x);
@@ -25,8 +23,7 @@ app.get(`/app/${emailPath}`, (req, res) => {
     return res.send('NaN');
   }
 
-  const result = lcm(x, y);
-  res.send(String(result)); // plain digits
+  res.send(String(lcm(x, y)));
 });
 
 app.listen(port, () => {
